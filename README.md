@@ -1,6 +1,6 @@
 [简书](https://www.jianshu.com/p/5120aaa68b75)
 
-[APK](https://github.com/AnJiaoDe/BaseDialog/tree/master/app/build/outputs/apk)
+[APK](https://github.com/AnJiaoDe/BaseDialog/blob/master/app/build/outputs/apk/app-debug.apk)
 
 如有任何问题或者是建议，可以QQ群:安娇德IT技术交流群757173381讨论，开源库会根据需求持续更新。
 
@@ -763,7 +763,7 @@ public class CYProgressDialog extends BaseDialog {
    
    [GitHub](https://github.com/AnJiaoDe)
 
-[CSDN](https://blog.csdn.net/confusing_awakening)
+关注专题[Android开发常用开源库](https://www.jianshu.com/c/3ff4b3951dc5)
 
 [简书](https://www.jianshu.com/u/b8159d455c69)
 
