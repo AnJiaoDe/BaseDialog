@@ -21,7 +21,7 @@ allprojects {
 
 ```
 dependencies {
-	        compile 'com.github.AnJiaoDe:BaseDialog:V1.1.1'
+	        compile 'com.github.AnJiaoDe:BaseDialog:V1.1.2'
 	}
 ```
 
