@@ -3,10 +3,10 @@ package com.cy.basedialog;
 import android.os.Bundle;
 import android.view.Gravity;
 import android.view.View;
-import android.view.WindowManager;
+import android.view.ViewGroup;
 
 import com.cy.dialog.BaseDialog;
-import com.cy.dialog.progress.CYProgressDialog;
+import com.cy.dialog.progress.ProgressDialog;
 
 public class MainActivity extends BaseActivity {
     private BaseDialog dialog;
@@ -30,8 +30,8 @@ public class MainActivity extends BaseActivity {
         switch (v.getId()) {
             case R.id.btn_center:
                 dialog = new BaseDialog(this);
-
-                dialog.config(R.layout.dialog_center, true).show();
+                dialog.contentView(R.layout.dialog_center)
+                        .canceledOnTouchOutside(true).show();
                 dialog.findViewById(R.id.tv_confirm).setOnClickListener(this);
                 dialog.findViewById(R.id.tv_cancel).setOnClickListener(this);
 
@@ -39,39 +39,55 @@ public class MainActivity extends BaseActivity {
             case R.id.btn_left:
                 BaseDialog dialog_left = new BaseDialog(this);
 
-                dialog_left.config(R.layout.dialog_left, 0.5f, Gravity.LEFT | Gravity.CENTER, BaseDialog.AnimInType.LEFT,
-                        WindowManager.LayoutParams.WRAP_CONTENT, WindowManager.LayoutParams.MATCH_PARENT, true).show();
+                dialog_left.contentView(R.layout.dialog_left)
+                        .layoutParams(new ViewGroup.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.MATCH_PARENT))
+                        .dimAmount(0.5f)
+                        .gravity(Gravity.LEFT | Gravity.CENTER)
+                        .animType(BaseDialog.AnimInType.LEFT)
+                        .canceledOnTouchOutside(true).show();
 
                 break;
             case R.id.btn_top:
                 BaseDialog dialog_top = new BaseDialog(this);
 
-                dialog_top.setOffset(0, ScreenUtils.dpInt2px(this, 48));
-
-                dialog_top.config(R.layout.dialog_photo, 0.5f, Gravity.TOP, BaseDialog.AnimInType.TOP,
-                        WindowManager.LayoutParams.MATCH_PARENT, WindowManager.LayoutParams.WRAP_CONTENT, true).show();
+                dialog_top.contentView(R.layout.dialog_photo)
+                        .layoutParams(new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT))
+                        .dimAmount(0.5f)
+                        .gravity(Gravity.TOP)
+                        .offset(0, ScreenUtils.dpInt2px(this, 48))
+                        .animType(BaseDialog.AnimInType.TOP)
+                        .canceledOnTouchOutside(true).show();
 
 
                 break;
             case R.id.btn_right:
                 BaseDialog dialog_right = new BaseDialog(this);
 
-                dialog_right.setOffset(20, 0);
+                dialog_right.contentView(R.layout.dialog_right)
+                        .layoutParams(new ViewGroup.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.MATCH_PARENT))
 
-                dialog_right.config(R.layout.dialog_right, Gravity.RIGHT | Gravity.CENTER, BaseDialog.AnimInType.RIGHT,
-                        WindowManager.LayoutParams.WRAP_CONTENT, WindowManager.LayoutParams.MATCH_PARENT, true).show();
+                        .gravity(Gravity.RIGHT | Gravity.CENTER)
+                        .animType(BaseDialog.AnimInType.RIGHT)
+                        .offset(20, 0)
+                        .canceledOnTouchOutside(true).show();
+
                 break;
             case R.id.btn_bottom:
                 BaseDialog dialog_bottom = new BaseDialog(this);
 
-                dialog_bottom.config(R.layout.dialog_photo, Gravity.BOTTOM, BaseDialog.AnimInType.BOTTOM, true).show();
+                dialog_bottom.contentView(R.layout.dialog_photo)
+                        .gravity(Gravity.BOTTOM)
+                        .animType(BaseDialog.AnimInType.BOTTOM)
+                        .canceledOnTouchOutside(true).show();
 
 
                 break;
             case R.id.btn_progress:
 
-                CYProgressDialog cyProgressDialog=new CYProgressDialog(this);
-                cyProgressDialog.config(0.4f,0xffffffff,20,0xffffffff,0xff2a5caa).show();
+                ProgressDialog progressDialog = new ProgressDialog(this);
+                progressDialog.color_iv(0xffffffff)
+                        .color_bg_progress(0xffffffff)
+                        .colors_progress(0xff2a5caa).show();
                 break;
             case R.id.tv_confirm:
                 dialog.dismiss();

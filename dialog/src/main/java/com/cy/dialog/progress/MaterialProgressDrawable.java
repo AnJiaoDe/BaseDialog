@@ -125,6 +125,10 @@ public class MaterialProgressDrawable extends Drawable implements Animatable {
         setupAnimators();
     }
 
+    public Ring getRing() {
+        return mRing;
+    }
+
     private void setSizeParameters(double progressCircleWidth, double progressCircleHeight,
                                    double centerRadius, double strokeWidth, float arrowWidth, float arrowHeight) {
         final Ring ring = mRing;

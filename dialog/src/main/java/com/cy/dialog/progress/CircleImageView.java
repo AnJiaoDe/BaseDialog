@@ -29,16 +29,18 @@ public class CircleImageView extends ImageView {
     private Animation.AnimationListener mListener;
     private int mShadowRadius;
 
-    public CircleImageView(Context context, int color, final float radius) {
+    private ShapeDrawable circle;
+
+    public CircleImageView(Context context) {
         super(context);
         final float density = getContext().getResources().getDisplayMetrics().density;
-        final int diameter = (int) (radius * density * 2);
+        final int diameter = (int) (20 * density * 2);
         final int shadowYOffset = (int) (density * Y_OFFSET);
         final int shadowXOffset = (int) (density * X_OFFSET);
 
         mShadowRadius = (int) (density * SHADOW_RADIUS);
 
-        ShapeDrawable circle;
+
         if (elevationSupported()) {
             circle = new ShapeDrawable(new OvalShape());
             ViewCompat.setElevation(this, SHADOW_ELEVATION * density);
@@ -52,9 +54,21 @@ public class CircleImageView extends ImageView {
             // set padding so the inner image sits correctly within the shadow.
             setPadding(padding, padding, padding, padding);
         }
-        circle.getPaint().setColor(color);
-        setBackgroundDrawable(circle);
+
+
+        setBackground(circle);
     }
+
+    public CircleImageView color(int color) {
+        circle.getPaint().setColor(color);
+
+        return this;
+    }
+    public CircleImageView radius(float radius) {
+
+        return this;
+    }
+
 
     private boolean elevationSupported() {
         return android.os.Build.VERSION.SDK_INT >= 21;
@@ -64,8 +78,8 @@ public class CircleImageView extends ImageView {
     protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
         super.onMeasure(widthMeasureSpec, heightMeasureSpec);
         if (!elevationSupported()) {
-            setMeasuredDimension(getMeasuredWidth() + mShadowRadius*2, getMeasuredHeight()
-                    + mShadowRadius*2);
+            setMeasuredDimension(getMeasuredWidth() + mShadowRadius * 2, getMeasuredHeight()
+                    + mShadowRadius * 2);
         }
     }
 
@@ -116,7 +130,7 @@ public class CircleImageView extends ImageView {
             mShadowRadius = shadowRadius;
             mCircleDiameter = circleDiameter;
             mRadialGradient = new RadialGradient(mCircleDiameter / 2, mCircleDiameter / 2,
-                    mShadowRadius, new int[] {
+                    mShadowRadius, new int[]{
                     FILL_SHADOW_COLOR, Color.TRANSPARENT
             }, null, Shader.TileMode.CLAMP);
             mShadowPaint.setShader(mRadialGradient);
