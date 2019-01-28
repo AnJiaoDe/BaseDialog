@@ -3,9 +3,10 @@
 
 [简书](https://www.jianshu.com/u/b8159d455c69)
 
-[APK](https://github.com/AnJiaoDe/BaseDialog/blob/master/app/build/outputs/apk/app-debug.apk)
+[GitHub](https://github.com/AnJiaoDe/BaseDialog)
 
-如有任何问题或者是建议，可以QQ群:安娇德IT技术交流群757173381讨论，开源库会根据需求持续更新。
+[APK](https://github.com/AnJiaoDe/BaseDialog/tree/master/app/build/outputs/apk)
+
 
 **使用方法**
 
@@ -22,16 +23,13 @@ allprojects {
 
 ```
 dependencies {
-	        compile 'com.github.AnJiaoDe:BaseDialog:V1.1.2'
+	        compile 'com.github.AnJiaoDe:BaseDialog:V1.1.8'
 	}
 ```
 
-**注意：如果sync报错，是因为和com.android.tools.build:gradle 3.0有关，**
-**可以改将compile改为implementation 或者api** 
-
 **1.Center**
 
-![Image text](gif/1.gif)
+![这里写图片描述](http://upload-images.jianshu.io/upload_images/11866078-652a850d1aff532d?imageMogr2/auto-orient/strip)
 
 ```
 <?xml version="1.0" encoding="utf-8"?>
@@ -83,7 +81,7 @@ dependencies {
 ```
 **2.Left**
 
-![Image text](gif/2.gif)
+![这里写图片描述](http://upload-images.jianshu.io/upload_images/11866078-2c3a288099162853?imageMogr2/auto-orient/strip)
 ```
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
@@ -112,7 +110,7 @@ OK, Google. 这句耳熟能详的命令，如今承载了 Google 全新的产品
 
 **3.Top**
 
-![Image text](gif/3.gif)
+![这里写图片描述](http://upload-images.jianshu.io/upload_images/11866078-b6e68994c9834a87?imageMogr2/auto-orient/strip)
 ```
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
@@ -166,7 +164,7 @@ OK, Google. 这句耳熟能详的命令，如今承载了 Google 全新的产品
 
 **4.Right**
 
-![Image text](gif/4.gif)
+![这里写图片描述](http://upload-images.jianshu.io/upload_images/11866078-512226550e5fbc79?imageMogr2/auto-orient/strip)
 
 
 ```
@@ -197,7 +195,7 @@ OK, Google. 这句耳熟能详的命令，如今承载了 Google 全新的产品
 
 **5.Bottom**
 
-![Image text](gif/5.gif)
+![这里写图片描述](http://upload-images.jianshu.io/upload_images/11866078-375e40d3a159e280?imageMogr2/auto-orient/strip)
 
 ```
 <?xml version="1.0" encoding="utf-8"?>
@@ -252,13 +250,11 @@ OK, Google. 这句耳熟能详的命令，如今承载了 Google 全新的产品
 
 **6.Progress**
 
-![Image text](gif/6.gif)
+![这里写图片描述](http://upload-images.jianshu.io/upload_images/11866078-0eb2f94cf75307f7?imageMogr2/auto-orient/strip)
  
  
 
 ```
-
-
 public class MainActivity extends BaseActivity {
     private BaseDialog dialog;
 
@@ -281,8 +277,8 @@ public class MainActivity extends BaseActivity {
         switch (v.getId()) {
             case R.id.btn_center:
                 dialog = new BaseDialog(this);
-
-                dialog.config(R.layout.dialog_center, true).show();
+                dialog.contentView(R.layout.dialog_center)
+                        .canceledOnTouchOutside(true).show();
                 dialog.findViewById(R.id.tv_confirm).setOnClickListener(this);
                 dialog.findViewById(R.id.tv_cancel).setOnClickListener(this);
 
@@ -290,39 +286,55 @@ public class MainActivity extends BaseActivity {
             case R.id.btn_left:
                 BaseDialog dialog_left = new BaseDialog(this);
 
-                dialog_left.config(R.layout.dialog_left, 0.5f, Gravity.LEFT | Gravity.CENTER, BaseDialog.AnimInType.LEFT,
-                        WindowManager.LayoutParams.WRAP_CONTENT, WindowManager.LayoutParams.MATCH_PARENT, true).show();
+                dialog_left.contentView(R.layout.dialog_left)
+                        .layoutParams(new ViewGroup.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.MATCH_PARENT))
+                        .dimAmount(0.5f)
+                        .gravity(Gravity.LEFT | Gravity.CENTER)
+                        .animType(BaseDialog.AnimInType.LEFT)
+                        .canceledOnTouchOutside(true).show();
 
                 break;
             case R.id.btn_top:
                 BaseDialog dialog_top = new BaseDialog(this);
 
-                dialog_top.setOffset(0, ScreenUtils.dpInt2px(this, 48));
-
-                dialog_top.config(R.layout.dialog_photo, 0.5f, Gravity.TOP, BaseDialog.AnimInType.TOP,
-                        WindowManager.LayoutParams.MATCH_PARENT, WindowManager.LayoutParams.WRAP_CONTENT, true).show();
+                dialog_top.contentView(R.layout.dialog_photo)
+                        .layoutParams(new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT))
+                        .dimAmount(0.5f)
+                        .gravity(Gravity.TOP)
+                        .offset(0, ScreenUtils.dpInt2px(this, 48))
+                        .animType(BaseDialog.AnimInType.TOP)
+                        .canceledOnTouchOutside(true).show();
 
 
                 break;
             case R.id.btn_right:
                 BaseDialog dialog_right = new BaseDialog(this);
 
-                dialog_right.setOffset(20, 0);
+                dialog_right.contentView(R.layout.dialog_right)
+                        .layoutParams(new ViewGroup.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.MATCH_PARENT))
 
-                dialog_right.config(R.layout.dialog_right, Gravity.RIGHT | Gravity.CENTER, BaseDialog.AnimInType.RIGHT,
-                        WindowManager.LayoutParams.WRAP_CONTENT, WindowManager.LayoutParams.MATCH_PARENT, true).show();
+                        .gravity(Gravity.RIGHT | Gravity.CENTER)
+                        .animType(BaseDialog.AnimInType.RIGHT)
+                        .offset(20, 0)
+                        .canceledOnTouchOutside(true).show();
+
                 break;
             case R.id.btn_bottom:
                 BaseDialog dialog_bottom = new BaseDialog(this);
 
-                dialog_bottom.config(R.layout.dialog_photo, Gravity.BOTTOM, BaseDialog.AnimInType.BOTTOM, true).show();
+                dialog_bottom.contentView(R.layout.dialog_photo)
+                        .gravity(Gravity.BOTTOM)
+                        .animType(BaseDialog.AnimInType.BOTTOM)
+                        .canceledOnTouchOutside(true).show();
 
 
                 break;
             case R.id.btn_progress:
 
-                CYProgressDialog cyProgressDialog=new CYProgressDialog(this);
-                cyProgressDialog.config(0.4f,0xffffffff,20,0xffffffff,0xff2a5caa).show();
+                ProgressDialog progressDialog = new ProgressDialog(this);
+                progressDialog.color_iv(0xffffffff)
+                        .color_bg_progress(0xffffffff)
+                        .colors_progress(0xff2a5caa).show();
                 break;
             case R.id.tv_confirm:
                 dialog.dismiss();
@@ -342,7 +354,6 @@ public class MainActivity extends BaseActivity {
  **BaseDialog**
 
 ```
-
 public class BaseDialog extends Dialog {
 
     public BaseDialog(Context context) {
@@ -350,195 +361,118 @@ public class BaseDialog extends Dialog {
 
     }
 
+
     public BaseDialog(Context context, int themeResId) {
         super(context, themeResId);
+
         requestWindowFeature(Window.FEATURE_NO_TITLE);// 去除对话框的标题
-        getWindow().setBackgroundDrawableResource(R.drawable.dialog_bg);//设置对话框边框背景,必须在代码中设置对话框背景，不然对话框背景是黑色的
+        GradientDrawable gradientDrawable = new GradientDrawable();
+        gradientDrawable.setColor(0x00000000);
+        getWindow().setBackgroundDrawable(gradientDrawable);//设置对话框边框背景,必须在代码中设置对话框背景，不然对话框背景是黑色的
 
-        setDimAmount(0.2f);
+        dimAmount(0.2f);
     }
 
-    /*
-             */
-    public BaseDialog config(@LayoutRes int layoutResID, boolean canceledOnTouchOutside) {
-
-
-        config(layoutResID, 0.2f, Gravity.CENTER, AnimInType.CENTER, WindowManager.LayoutParams.MATCH_PARENT,
-                WindowManager.LayoutParams.WRAP_CONTENT, canceledOnTouchOutside);
-
+    public BaseDialog contentView(@LayoutRes int layoutResID) {
+        getWindow().setContentView(layoutResID);
         return this;
     }
 
-    /*
-             */
-    public BaseDialog config(@NonNull View view, boolean canceledOnTouchOutside) {
 
-
-        config(view, 0.2f, Gravity.CENTER, AnimInType.CENTER, WindowManager.LayoutParams.MATCH_PARENT,
-                WindowManager.LayoutParams.WRAP_CONTENT, canceledOnTouchOutside);
-
+    public BaseDialog contentView(@NonNull View view) {
+        getWindow().setContentView(view);
         return this;
     }
 
-    /*
-             */
-    public BaseDialog config(@LayoutRes int layoutResID, int gravity, AnimInType animInType, boolean canceledOnTouchOutside) {
-
-        config(layoutResID, 0.2f, gravity, animInType, WindowManager.LayoutParams.MATCH_PARENT,
-                WindowManager.LayoutParams.WRAP_CONTENT, canceledOnTouchOutside);
-
-
+    public BaseDialog contentView(@NonNull View view, @Nullable ViewGroup.LayoutParams params) {
+        getWindow().setContentView(view, params);
+        return this;
+    }
+    public BaseDialog layoutParams(@Nullable ViewGroup.LayoutParams params) {
+        getWindow().setLayout(params.width, params.height);
         return this;
     }
 
-    /*
-             */
-    public BaseDialog config(@NonNull View view, int gravity, AnimInType animInType, boolean canceledOnTouchOutside) {
 
-        config(view, 0.2f, gravity, animInType, WindowManager.LayoutParams.MATCH_PARENT,
-                WindowManager.LayoutParams.WRAP_CONTENT, canceledOnTouchOutside);
-
-
-        return this;
-    }
-
-    /*
-             */
-    public BaseDialog config(@LayoutRes int layoutResID, int gravity, AnimInType animInType,
-                             int width, int height, boolean canceledOnTouchOutside) {
-
-        config(layoutResID, 0.2f, gravity, animInType, width, height, canceledOnTouchOutside);
-
-        return this;
-    }
-
-    /*
-             */
-    public BaseDialog config(@NonNull View view, int gravity, AnimInType animInType,
-                             int width, int height, boolean canceledOnTouchOutside) {
-
-        config(view, 0.2f, gravity, animInType, width, height, canceledOnTouchOutside);
-
-        return this;
-    }
-
-    /*
-           参数：dimAmount背景阴影
-            */
-    public BaseDialog config(@LayoutRes int layoutResID, float dimAmount, int gravity, AnimInType animInType,
-                             int width, int height, boolean canceledOnTouchOutside) {
-        setContentView(layoutResID);//填充对话框布局
-
-
-        setDimAmount(dimAmount);
-
-        getWindow().setGravity(gravity);
-
-        setAnimType(animInType);
-
-
-        getWindow().setLayout(width, height);
-
-        setCanceledOnTouchOutside(canceledOnTouchOutside ? true : false);
-        return this;
-    }
-
-    /*
-           参数：dimAmount背景阴影
-            */
-    public BaseDialog config(@NonNull View view, float dimAmount, int gravity, AnimInType animInType,
-                             int width, int height, boolean canceledOnTouchOutside) {
-        setContentView(view);//填充对话框布局
-
-
-        setDimAmount(dimAmount);
-
-        getWindow().setGravity(gravity);
-
-        setAnimType(animInType);
-
-
-        getWindow().setLayout(width, height);
-
-        setCanceledOnTouchOutside(canceledOnTouchOutside ? true : false);
-        return this;
-    }
-
-    /*
-           参数：dimAmount背景阴影
-            */
-    public BaseDialog config(@NonNull View view, @Nullable ViewGroup.LayoutParams params, float dimAmount, int gravity, AnimInType animInType,
-                             int width, int height, boolean canceledOnTouchOutside) {
-        setContentView(view, params);//填充对话框布局
-
-
-        setDimAmount(dimAmount);
-
-        getWindow().setGravity(gravity);
-
-        setAnimType(animInType);
-
-
-        getWindow().setLayout(width, height);
-
-        setCanceledOnTouchOutside(canceledOnTouchOutside ? true : false);
-        return this;
-    }
-
-    /*
-    动画类型
+    /**
+     * 点击外面是否能dissmiss
+     *
+     * @param canceledOnTouchOutside
+     * @return
      */
-    public BaseDialog setAnimType(AnimInType animInType) {
-
-        if (animInType == AnimInType.CENTER) {
-            getWindow().setWindowAnimations(R.style.dialog_zoom);
-            return this;
-
-        }
-        if (animInType == AnimInType.LEFT) {
-            getWindow().setWindowAnimations(R.style.dialog_anim_left);
-            return this;
-
-        }
-        if (animInType == AnimInType.TOP) {
-            getWindow().setWindowAnimations(R.style.dialog_anim_top);
-            return this;
-
-        }
-        if (animInType == AnimInType.RIGHT) {
-            getWindow().setWindowAnimations(R.style.dialog_anim_right);
-            return this;
-
-        }
-        if (animInType == AnimInType.BOTTOM) {
-            getWindow().setWindowAnimations(R.style.dialog_anim_bottom);
-            return this;
-
-        }
+    public BaseDialog canceledOnTouchOutside(boolean canceledOnTouchOutside) {
+        setCanceledOnTouchOutside(canceledOnTouchOutside);
         return this;
     }
 
-    public void setOffset(int x, int y) {
+    /**
+     * 位置
+     *
+     * @param gravity
+     * @return
+     */
+    public BaseDialog gravity(int gravity) {
+
+        getWindow().setGravity(gravity);
+
+        return this;
+
+    }
+
+    /**
+     * 偏移
+     *
+     * @param x
+     * @param y
+     * @return
+     */
+    public BaseDialog offset(int x, int y) {
         WindowManager.LayoutParams layoutParams = getWindow().getAttributes();
         layoutParams.x = x;
         layoutParams.y = y;
 
-
-    }
-
-    public float getDimAmount() {
-        return getWindow().getAttributes().dimAmount;
+        return this;
     }
 
     /*
-    设置背景阴影,必须setContentView之后调用才生效
-     */
-    public BaseDialog setDimAmount(float dimAmount) {
-
+       设置背景阴影,必须setContentView之后调用才生效
+        */
+    public BaseDialog dimAmount(float dimAmount) {
 
         WindowManager.LayoutParams lp = getWindow().getAttributes();
         lp.dimAmount = dimAmount;
+        return this;
+    }
 
+
+    /*
+   动画类型
+    */
+    public BaseDialog animType(BaseDialog.AnimInType animInType) {
+
+
+        switch (animInType.getIntType()) {
+            case 0:
+                getWindow().setWindowAnimations(R.style.dialog_zoom);
+
+                break;
+            case 1:
+                getWindow().setWindowAnimations(R.style.dialog_anim_left);
+
+                break;
+            case 2:
+                getWindow().setWindowAnimations(R.style.dialog_anim_top);
+
+                break;
+            case 3:
+                getWindow().setWindowAnimations(R.style.dialog_anim_right);
+
+                break;
+            case 4:
+                getWindow().setWindowAnimations(R.style.dialog_anim_bottom);
+
+                break;
+        }
         return this;
     }
 
@@ -548,100 +482,75 @@ public class BaseDialog extends Dialog {
      */
     public enum AnimInType {
         CENTER(0),
-        LEFT(2),
-        TOP(4),
+        LEFT(1),
+        TOP(2),
         RIGHT(3),
-        BOTTOM(1);
+        BOTTOM(4);
 
         AnimInType(int n) {
             intType = n;
         }
 
         final int intType;
+
+        public int getIntType() {
+            return intType;
+        }
     }
 }
 
 ```
 
- **CYProgressDialog**
+ **ProgressDialog**
 
 ```
+public class ProgressDialog extends BaseDialog {
 
-
-public class CYProgressDialog extends BaseDialog {
-
-    private MaterialProgressDrawable mProgress;
+    private MaterialProgressDrawable progress;
 
     private ValueAnimator valueAnimator;
+    private CircleImageView imageView;
 
-    public CYProgressDialog(Context context) {
+    public ProgressDialog(Context context) {
         super(context);
         setCanceledOnTouchOutside(false);
 
-    }
+        FrameLayout frameLayout = new FrameLayout(context);
 
-    /**
-     * @param color_iv
-     * @param radius_iv
-     * @param color_bg_progress
-     * @param colors_progress
-     * @return
-     */
+        imageView = new CircleImageView(context);
 
-    public CYProgressDialog config(int color_iv, float radius_iv, int color_bg_progress, int... colors_progress) {
-        config(0.2f, color_iv, radius_iv, color_bg_progress, colors_progress);
+        progress = new MaterialProgressDrawable(getContext(), imageView);
 
 
-        return this;
-    }
-
-    public CYProgressDialog config(float dimAmount, int color_iv, float radius_iv, int color_bg_progress, int... colors_progress) {
-
-
-        FrameLayout frameLayout = new FrameLayout(getContext());
-
-
-        CircleImageView imageView = new CircleImageView(getContext(), color_iv, radius_iv);
-
-
-        mProgress = new MaterialProgressDrawable(getContext(), imageView);
-
-
-        mProgress.setBackgroundColor(color_bg_progress);
-        //圈圈颜色,可以是多种颜色
-        mProgress.setColorSchemeColors(colors_progress);
         //设置圈圈的各种大小
-        mProgress.updateSizes(MaterialProgressDrawable.DEFAULT);
+        progress.updateSizes(MaterialProgressDrawable.DEFAULT);
 
-        mProgress.showArrow(false);
-        imageView.setImageDrawable(mProgress);
+        progress.showArrow(false);
+        imageView.setImageDrawable(progress);
 
         frameLayout.addView(imageView);
 
 
         valueAnimator = valueAnimator.ofFloat(0f, 1f);
-        valueAnimator.setDuration(600);
+
         valueAnimator.setInterpolator(new DecelerateInterpolator());
         valueAnimator.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
             @Override
             public void onAnimationUpdate(ValueAnimator animation) {
                 float n = (float) animation.getAnimatedValue();
                 //圈圈的旋转角度
-                mProgress.setProgressRotation(n * 0.5f);
+                progress.setProgressRotation(n * 0.5f);
                 //圈圈周长，0f-1F
-                mProgress.setStartEndTrim(0f, n * 0.8f);
+                progress.setStartEndTrim(0f, n * 0.8f);
                 //箭头大小，0f-1F
-                mProgress.setArrowScale(n);
+                progress.setArrowScale(n);
                 //透明度，0-255
-                mProgress.setAlpha((int) (255 * n));
+                progress.setAlpha((int) (255 * n));
             }
         });
 
         getWindow().setLayout(WindowManager.LayoutParams.WRAP_CONTENT, WindowManager.LayoutParams.WRAP_CONTENT);
         setContentView(frameLayout);
-
-
-        setDimAmount(dimAmount);
 
         setOnKeyListener(new OnKeyListener() {
             @Override
@@ -655,17 +564,53 @@ public class CYProgressDialog extends BaseDialog {
             }
         });
 
+
+    }
+
+
+    public ProgressDialog duration(long duration) {
+        valueAnimator.setDuration(duration);
+
+        return this;
+    }
+
+
+    public ProgressDialog radius_iv(float radius_iv) {
+        imageView.radius(radius_iv);
+
+        return this;
+    }
+
+    public ProgressDialog color_iv(int color_iv) {
+        imageView.color(color_iv);
+
+        return this;
+    }
+
+    public ProgressDialog color_bg_progress(int color_bg_progress) {
+        progress.setBackgroundColor(color_bg_progress);
+
+        return this;
+    }
+
+    /**
+     * //圈圈颜色,可以是多种颜色
+     *
+     * @param colors_progress
+     * @return
+     */
+    public ProgressDialog colors_progress(int... colors_progress) {
+        progress.setColorSchemeColors(colors_progress);
+
         return this;
     }
 
     @Override
     public void show() {
         super.show();
-        if (mProgress == null) return;
-
-        mProgress.start();
+        if (progress == null) return;
+        progress.start();
         if (valueAnimator == null) return;
-
         valueAnimator.start();
 
 
@@ -674,34 +619,18 @@ public class CYProgressDialog extends BaseDialog {
     @Override
     public void hide() {
         super.hide();
-        if (mProgress == null) return;
-
-        mProgress.stop();
+        if (progress == null) return;
+        progress.stop();
         if (valueAnimator == null) return;
-
         valueAnimator.cancel();
 
-
-    }
-
-    public void setBackgroundColor(int color) {
-        if (mProgress == null) return;
-
-        mProgress.setBackgroundColor(color);
-
-    }
-
-    public void setColorSchemeColors(int... colors) {
-        if (mProgress == null) return;
-
-        mProgress.setColorSchemeColors(colors);
 
     }
 }
 
 ```
 
-
+ 
  
  **更新日志**
  
