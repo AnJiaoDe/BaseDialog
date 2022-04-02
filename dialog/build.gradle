@@ -35,8 +35,5 @@ artifacts {
 }
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
-    implementation 'androidx.appcompat:appcompat:+'
-    testImplementation 'junit:junit:+'
-    androidTestImplementation 'androidx.test.ext:junit:+'
-    androidTestImplementation 'androidx.test.espresso:espresso-core:+'
+    compileOnly 'androidx.appcompat:appcompat:+'
 }
