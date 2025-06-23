@@ -8,6 +8,8 @@ import android.view.WindowManager;
 import android.view.animation.DecelerateInterpolator;
 import android.widget.FrameLayout;
 
+import androidx.activity.ComponentActivity;
+
 import com.cy.dialog.BaseDialog;
 
 
@@ -22,13 +24,13 @@ public class ProgressDialog extends BaseDialog {
     private ValueAnimator valueAnimator;
     private CircleImageView imageView;
 
-    public ProgressDialog(Context context) {
-        super(context);
+    public ProgressDialog(ComponentActivity componentActivity) {
+        super(componentActivity);
         setCanceledOnTouchOutside(false);
 
-        FrameLayout frameLayout = new FrameLayout(context);
+        FrameLayout frameLayout = new FrameLayout(getContext());
 
-        imageView = new CircleImageView(context);
+        imageView = new CircleImageView(getContext());
 
         progress = new MaterialProgressDrawable(getContext(), imageView);
 

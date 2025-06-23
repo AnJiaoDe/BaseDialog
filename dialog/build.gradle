@@ -35,5 +35,5 @@ artifacts {
 }
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
-    compileOnly 'androidx.appcompat:appcompat:+'
+    compileOnly 'androidx.appcompat:appcompat:1.1.0'
 }

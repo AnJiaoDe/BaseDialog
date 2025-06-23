@@ -8,6 +8,7 @@ import android.view.ViewGroup;
 import android.view.Window;
 import android.view.WindowManager;
 
+import androidx.activity.ComponentActivity;
 import androidx.annotation.LayoutRes;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -18,15 +19,15 @@ import androidx.annotation.Nullable;
  */
 
 public class BaseDialog extends Dialog {
+    private ComponentActivity componentActivity;
 
-    public BaseDialog(Context context) {
-        this(context, 0);
-
+    public BaseDialog(ComponentActivity componentActivity) {
+        this(componentActivity, 0);
     }
 
-
-    public BaseDialog(Context context, int themeResId) {
-        super(context, themeResId);
+    public BaseDialog(ComponentActivity componentActivity, int themeResId) {
+        super(componentActivity, themeResId);
+        this.componentActivity = componentActivity;
 
         requestWindowFeature(Window.FEATURE_NO_TITLE);// 去除对话框的标题
         GradientDrawable gradientDrawable = new GradientDrawable();
@@ -34,6 +35,12 @@ public class BaseDialog extends Dialog {
         getWindow().setBackgroundDrawable(gradientDrawable);//设置对话框边框背景,必须在代码中设置对话框背景，不然对话框背景是黑色的
 
         dimAmount(0.2f);
+    }
+
+    @Override
+    public void show() {
+        if (componentActivity.isDestroyed()) return;
+        super.show();
     }
 
     public BaseDialog contentView(@LayoutRes int layoutResID) {
@@ -51,6 +58,7 @@ public class BaseDialog extends Dialog {
         getWindow().setContentView(view, params);
         return this;
     }
+
     public BaseDialog layoutParams(@Nullable ViewGroup.LayoutParams params) {
         getWindow().setLayout(params.width, params.height);
         return this;
