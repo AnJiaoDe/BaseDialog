@@ -1,7 +1,4 @@
-  微信公众号
- ![这里写图片描述](http://upload-images.jianshu.io/upload_images/11866078-a6969884111cd3b4?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
 
-[简书](https://www.jianshu.com/u/b8159d455c69)
 
 [GitHub](https://github.com/AnJiaoDe/BaseDialog)
 
@@ -660,12 +657,3 @@ public class ProgressDialog extends BaseDialog {
 
 关注专题[Android开发常用开源库](https://www.jianshu.com/c/3ff4b3951dc5)
 
-[简书](https://www.jianshu.com/u/b8159d455c69)
-
- 微信公众号
- ![这里写图片描述](http://upload-images.jianshu.io/upload_images/11866078-a6969884111cd3b4?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
-
-QQ群
-![这里写图片描述](http://upload-images.jianshu.io/upload_images/11866078-8fa028ef79948e75?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
-
- 
