@@ -43,6 +43,12 @@ public class BaseDialog extends Dialog {
         super.show();
     }
 
+    @Override
+    public void dismiss() {
+        if (componentActivity.isDestroyed()) return;
+        super.dismiss();
+    }
+
     public BaseDialog contentView(@LayoutRes int layoutResID) {
         getWindow().setContentView(layoutResID);
         return this;
