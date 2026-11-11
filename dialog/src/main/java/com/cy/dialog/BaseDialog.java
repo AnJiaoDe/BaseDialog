@@ -39,14 +39,22 @@ public class BaseDialog extends Dialog {
 
     @Override
     public void show() {
-        if (componentActivity.isDestroyed()) return;
-        super.show();
+        if (componentActivity == null
+                || componentActivity.isFinishing()
+                || componentActivity.isDestroyed()) {
+            return;
+        }
+
+        if (!isShowing()) {
+            super.show();
+        }
     }
 
     @Override
     public void dismiss() {
-        if (componentActivity.isDestroyed()) return;
-        super.dismiss();
+        if (isShowing()) {
+            super.dismiss();
+        }
     }
 
     public BaseDialog contentView(@LayoutRes int layoutResID) {
